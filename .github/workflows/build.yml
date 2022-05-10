@@ -1,0 +1,20 @@
+
+name: CI-dev-pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: <enter image>
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: "gaint_backend"
+      - name: RunOne
+        run: |
+          echo Hello, world!

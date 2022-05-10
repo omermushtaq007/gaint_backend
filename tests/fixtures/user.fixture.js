@@ -38,9 +38,14 @@ const insertUsers = async (users) => {
   await User.insertMany(users.map((user) => ({ ...user, password: hashedPassword })));
 };
 
+const userEmail = async (users) => {
+  await User.findOne({ email: users[0].email });
+};
+
 module.exports = {
   userOne,
   userTwo,
   admin,
   insertUsers,
+  userEmail,
 };

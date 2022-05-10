@@ -13,7 +13,7 @@ const setupTestDB = require('../utils/setupTestDB');
 const { User, Token } = require('../../src/models');
 const { roleRights } = require('../../src/config/roles');
 const { tokenTypes } = require('../../src/config/tokens');
-const { userOne, admin, insertUsers } = require('../fixtures/user.fixture');
+const { userOne, admin, insertUsers, userEmail } = require('../fixtures/user.fixture');
 const { userOneAccessToken, adminAccessToken } = require('../fixtures/token.fixture');
 
 setupTestDB();
@@ -23,25 +23,27 @@ describe('Auth routes', () => {
     let newUser;
     beforeEach(() => {
       newUser = {
-        name: faker.name.findName(),
+        firstName: faker.name.findName(),
+        lastName: faker.name.findName(),
         email: faker.internet.email().toLowerCase(),
         password: 'password1',
       };
     });
 
     test('should return 201 and successfully register user if request data is ok', async () => {
+      // console.log(newUser, 'newUser', );
       const res = await request(app).post('/v1/auth/register').send(newUser).expect(httpStatus.CREATED);
-
       expect(res.body.user).not.toHaveProperty('password');
       expect(res.body.user).toEqual({
-        id: expect.anything(),
-        name: newUser.name,
+        _id: expect.anything(),
+        firstName: newUser.name,
+        lastName: newUser.name,
         email: newUser.email,
         role: 'user',
         isEmailVerified: false,
       });
 
-      const dbUser = await User.findById(res.body.user.id);
+      const dbUser = await User.findById(res.body.user._id);
       expect(dbUser).toBeDefined();
       expect(dbUser.password).not.toBe(newUser.password);
       expect(dbUser).toMatchObject({ name: newUser.name, email: newUser.email, role: 'user', isEmailVerified: false });
@@ -59,7 +61,7 @@ describe('Auth routes', () => {
     });
 
     test('should return 400 error if email is already used', async () => {
-      await insertUsers([userOne]);
+      await userEmail([userOne]);
       newUser.email = userOne.email;
 
       await request(app).post('/v1/auth/register').send(newUser).expect(httpStatus.BAD_REQUEST);
