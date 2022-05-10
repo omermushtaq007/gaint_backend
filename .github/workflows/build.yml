@@ -30,7 +30,7 @@ jobs:
         run: |
           echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c1-7)"  >> $GITHUB_ENV
       - name: Get branch name (merge)
-        if: github.event_name != "pull_request"
+        if: github.event_name != 'pull_request'
         shell: bash
         run: echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
       - name: Get branch name (pull request)
@@ -39,4 +39,4 @@ jobs:
         run: echo "BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
 
-        
+
