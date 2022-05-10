@@ -16,6 +16,27 @@ jobs:
         with:
           path: "gaint_backend"
 
-      - name: RunOne
+      - name: Build docker
         run: |
           echo Hello, world!
+          echo --Building and starting up docker--
+          docker-compose -f ./gaint_backend/docker-compose.yml -p testing up -d
+          echo === Complete test Case ===
+      - name: Run test
+        run: |
+          echo -- test--
+      - name : Extract commit
+        shell: bash
+        run: |
+          echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c1-7)"  >> $GITHUB_ENV
+      - name: Get branch name (merge)
+        if: github.event_name != "pull_request"
+        shell: bash
+        run: echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+
+
+        
