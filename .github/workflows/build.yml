@@ -19,6 +19,8 @@ jobs:
       - name: Build docker
         run: |
           echo Hello, world!
+          docker --version
+          echo version  
           echo --Building and starting up docker--
           docker-compose -f ./gaint_backend/docker-compose.dev.yml -p testing up -d
           echo === Complete test Case ===
