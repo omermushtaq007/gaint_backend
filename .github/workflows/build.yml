@@ -18,12 +18,12 @@ jobs:
 
       - name: Build docker
         run: |
-          echo Hello, world!
+          echo Docker Build
           docker --version
           echo version  
           echo --Building and starting up docker--
           docker-compose -f ./gaint_backend/docker-compose.yml -f ./gaint_backend/docker-compose.dev.yml up
-          echo === Complete test Case ===
+          echo === Complete Build ===
       - name: Run test
         run: |
           echo -- test--
