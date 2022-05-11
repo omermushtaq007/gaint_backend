@@ -16,11 +16,39 @@ const userSchema = mongoose.Schema(
       required: false,
       trim: true,
     },
+    salutation: {
+      type: String,
+      required: true,
+    },
     lastName: {
       type: String,
       required: false,
       trim: true,
     },
+    userName: {
+      type: String,
+      required: true,
+    },
+    club: {
+      type: String,
+      required: true,
+    },
+    position: {
+      type: String,
+      required: true,
+    },
+    sport_type: {
+      type: String,
+      required: true,
+    },
+    account_type: {
+      type: String,
+      required: true,
+    },
+    // club: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: 'Club',
+    // },
     email: {
       type: String,
       required: true,
