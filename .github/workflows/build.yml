@@ -20,7 +20,7 @@ jobs:
         run: |
           echo Hello, world!
           echo --Building and starting up docker--
-          docker-compose -f ./gaint_backend/docker-compose.yml -p testing up -d
+          docker-compose -f ./gaint_backend/docker-compose.dev.yml -p testing up -d
           echo === Complete test Case ===
       - name: Run test
         run: |
