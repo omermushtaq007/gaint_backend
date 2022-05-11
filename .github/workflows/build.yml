@@ -22,7 +22,7 @@ jobs:
           docker --version
           echo version  
           echo --Building and starting up docker--
-          docker-compose -f ./gaint_backend/docker-compose.dev.yml -p testing up -d
+          docker-compose -f ./gaint_backend/docker-compose.yml -f ./gaint_backend/docker-compose.dev.yml up
           echo === Complete test Case ===
       - name: Run test
         run: |
