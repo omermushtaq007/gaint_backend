@@ -127,10 +127,10 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
  * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
  * @returns {Promise<boolean>}
  */
-userSchema.statics.isUserNameTaken = async function (userName) {
-  const user = await this.findOne({ userName });
-  return !!user;
-};
+// userSchema.statics.isUserNameTaken = async function (userName) {
+//   const user = await this.findOne({ userName });
+//   return !!user;
+// };
 
 /**
  * Check if password matches the user's password
