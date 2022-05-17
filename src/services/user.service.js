@@ -10,7 +10,7 @@ const ApiError = require('../utils/ApiError');
 const createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
-  } else if (await User.isUsernameTaken(userBody.username)) {
+  } else if (await User.isUserNameTaken(userBody.username)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Username already taken');
   }
   return User.create(userBody);
