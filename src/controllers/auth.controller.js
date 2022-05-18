@@ -5,7 +5,12 @@ const { authService, userService, tokenService, emailService } = require('../ser
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.status(httpStatus.CREATED).send({ user, tokens });
+  if (user.isEmailVerified === true) {
+    res.status(httpStatus.CREATED).send({ user, tokens });
+  } else {
+    await emailService.sendVerificationEmail(user.email, tokens.access.token);
+    res.status(httpStatus.CREATED).send({ user, message: 'Verification email sent', verification: false });
+  }
 });
 
 const login = catchAsync(async (req, res) => {
