@@ -31,19 +31,19 @@ const userSchema = mongoose.Schema(
     },
     club: {
       type: String,
-      required: true,
+      // required: true,
     },
     position: {
       type: String,
-      required: true,
+      // required: true,
     },
     sport_type: {
       type: String,
-      required: true,
+      // required: true,
     },
     account_type: {
       type: String,
-      required: true,
+      // required: true,
     },
     // club: {
     //   type: mongoose.Schema.Types.ObjectId,
