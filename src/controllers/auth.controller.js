@@ -5,8 +5,8 @@ const { authService, userService, tokenService, emailService } = require('../ser
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   // check user is verified or not
-  if (!user.isVerified) {
-    res.status(httpStatus.UNAUTHORIZED).send('Please verify your email first');
+  if (!user.isEmailVerified) {
+    return res.status(httpStatus.UNAUTHORIZED).send('Please verify your email first');
   }
   const tokens = await tokenService.generateAuthTokens(user);
   res.status(httpStatus.CREATED).send({ user, tokens });
